@@ -11,24 +11,11 @@
 |
 */
 
-
-Route::get('test', function(){
-    return view('welcome');
-});
 Route::group(['middleware' => 'auth'], function(){
-    Route::get('/', 'Admin\DashboardController@index')->name('dashboard');
-});
+    // Route::get('/', 'Admin\DashboardController@index')->name('dashboard');
+    Route::get('/{any}', 'Admin\DashboardController@index')->where('any', '.*');
 
-Route::group(['prefix' => 'site/dam'], function(){
-    Route::get('/', 'Admin\DamController@index')->name('dam.index');
-    Route::get('/{kode_bendungan}', 'Admin\DamController@detail')->name('dam.detail');
 });
-
-Route::group(['prefix' => 'helpdesk'], function(){
-    Route::get('/', 'HelpdeskController@index')->name('helpdesk.index');
-    Route::get('manual', 'ManualController@index')->name('helpdesk.manual');
-});
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

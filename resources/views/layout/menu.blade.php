@@ -1,17 +1,20 @@
 <ul class="site-menu" data-plugin="menu">
     <li class="site-menu-category">General</li>
+
     <li class="site-menu-item active">
         
-    <a href="{{ route('dashboard') }}">
-            <i class="site-menu-icon wb-dashboard" aria-hidden="true"></i>
-            <span class="site-menu-title">Dashboard</span>
-        </a>
+        <router-link to="/">
+            <a>
+                <i class="site-menu-icon wb-dashboard" aria-hidden="true"></i>
+                <span class="site-menu-title">Dashboard</span>
+            </a>
+        </router-link>
         
     </li>
     
     <li class="site-menu-item">
         
-        <a href="{{ route('dashboard') }}">
+        <a href="/">
             <i class="site-menu-icon fa fa-map" aria-hidden="true"></i>
             <span class="site-menu-title">Full Map View</span>
         </a>
@@ -20,13 +23,15 @@
 
     <li class="site-menu-category">Master Data</li>
 
-    <li class="site-menu-item has-sub" class="active">
+    <li class="site-menu-item" :class="{'router-link-active' : '/dam'}">
         
-        <a href="index.html">
-            <i class="site-menu-icon fa fa-thumb-tack" aria-hidden="true"></i>
-            <span class="site-menu-title">DAM Management</span>
-        </a>
-        
+        <router-link to="/datadam">
+            <a>
+                <i class="site-menu-icon fa fa-map" aria-hidden="true"></i>
+                <span class="site-menu-title">DATA DAM</span>
+
+            </a>
+        </router-link>
     </li>
 
     <li class="site-menu-item has-sub" class="active">

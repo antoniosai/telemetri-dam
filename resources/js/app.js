@@ -9,6 +9,17 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+import VueRouter from 'vue-router';
+
+//View
+import DataDam from './components/dam/Data'
+import AdminDashboard from './components/admin/Dashboard'
+
+//Menu Admin
+// import MenuAdmin from './components/admin/Menu'
+
+Vue.use(VueRouter);
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -18,6 +29,11 @@ window.Vue = require('vue');
  */
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('data-dam', require('./components/dam/Data.vue'));
+
+//Menu Admin
+Vue.component('menu-admin', require('./components/admin/Menu.vue'));
+
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key)))
@@ -28,6 +44,25 @@ Vue.component('example-component', require('./components/ExampleComponent.vue'))
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+
+const router = new VueRouter({
+    mode: 'history',
+    routes: [
+        {
+            path: '/datadam',
+            name: 'datadam',
+            component: DataDam,
+            meta: {title: 'Data DAM'}
+        },
+        {
+            path: '/dashboard',
+            name: 'admin',
+            component: AdminDashboard,
+            meta: {title: 'Dashboard'}
+        }
+    ],
+});
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    router
 });

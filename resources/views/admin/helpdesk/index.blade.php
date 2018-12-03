@@ -5,6 +5,8 @@ Help Desk
 @endsection
 
 @section('content')
+<data-dam></data-dam>
+
 <div class="col-sm-12 col-xl-12">
     <div class="card card-shadow card-responsive" id="widgetLineareaColor">
 
