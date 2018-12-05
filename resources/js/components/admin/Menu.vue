@@ -13,12 +13,14 @@
             
         </li>
         
-        <li class="site-menu-item">
+        <li class="site-menu-item" :class="{'active' : subIsActive('/map_view')}">
             
-            <a href="/">
-                <i class="site-menu-icon fa fa-map" aria-hidden="true"></i>
-                <span class="site-menu-title">Full Map View</span>
-            </a>
+            <router-link to="/map_view">
+                <a>
+                    <i class="site-menu-icon fa fa-map" aria-hidden="true"></i>
+                    <span class="site-menu-title">Full Map View</span>
+                </a>
+            </router-link>
             
         </li>
 

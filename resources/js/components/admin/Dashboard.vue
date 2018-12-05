@@ -113,6 +113,7 @@
     // Vue.use(DataTables);
 
     export default {
+        title: 'Dashboard New',
         data(){
             return {
                 cruds: [],

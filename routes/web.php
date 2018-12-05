@@ -11,11 +11,11 @@
 |
 */
 
-Route::group(['middleware' => 'auth'], function(){
+// Route::group(['middleware' => 'auth'], function(){
     // Route::get('/', 'Admin\DashboardController@index')->name('dashboard');
     Route::get('/{any}', 'Admin\DashboardController@index')->where('any', '.*');
 
-});
+// });
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

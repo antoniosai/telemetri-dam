@@ -11,13 +11,13 @@ window.Vue = require('vue');
 
 import VueRouter from 'vue-router';
 
-//View
-import DataDam from './components/dam/Data'
-import AdminDashboard from './components/admin/Dashboard'
+//Additional from Me
+import titleMixin from './titleMixin'
+import configRouter from './router';
 
-//Menu Admin
 // import MenuAdmin from './components/admin/Menu'
 
+Vue.mixin(titleMixin)
 Vue.use(VueRouter);
 
 /**
@@ -30,6 +30,9 @@ Vue.use(VueRouter);
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('data-dam', require('./components/dam/Data.vue'));
+
+//Full Maps View
+Vue.component('full-map', require('./components/MapView.vue'));
 
 //Menu Admin
 Vue.component('menu-admin', require('./components/admin/Menu.vue'));
@@ -47,20 +50,7 @@ Vue.component('menu-admin', require('./components/admin/Menu.vue'));
 
 const router = new VueRouter({
     mode: 'history',
-    routes: [
-        {
-            path: '/datadam',
-            name: 'datadam',
-            component: DataDam,
-            meta: {title: 'Data DAM'}
-        },
-        {
-            path: '/dashboard',
-            name: 'admin',
-            component: AdminDashboard,
-            meta: {title: 'Dashboard'}
-        }
-    ],
+    routes: configRouter,
 });
 const app = new Vue({
     el: '#app',

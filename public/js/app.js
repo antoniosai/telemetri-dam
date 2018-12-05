@@ -14085,10 +14085,8 @@ module.exports = __webpack_require__(54);
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_router__ = __webpack_require__(42);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_dam_Data__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_dam_Data___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_dam_Data__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_admin_Dashboard__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_admin_Dashboard___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_admin_Dashboard__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__titleMixin__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__router__ = __webpack_require__(60);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -14097,12 +14095,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 __webpack_require__(15);
 
 window.Vue = __webpack_require__(39);
- //View
+ //Additional from Me
 
 
- //Menu Admin
-// import MenuAdmin from './components/admin/Menu'
+ // import MenuAdmin from './components/admin/Menu'
 
+Vue.mixin(__WEBPACK_IMPORTED_MODULE_1__titleMixin__["a" /* default */]);
 Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]);
 /**
  * The following block of code may be used to automatically register your
@@ -14113,7 +14111,9 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]);
  */
 
 Vue.component('example-component', __webpack_require__(48));
-Vue.component('data-dam', __webpack_require__(12)); //Menu Admin
+Vue.component('data-dam', __webpack_require__(12)); //Full Maps View
+
+Vue.component('full-map', __webpack_require__(62)); //Menu Admin
 
 Vue.component('menu-admin', __webpack_require__(51)); // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key)))
@@ -14126,21 +14126,7 @@ Vue.component('menu-admin', __webpack_require__(51)); // const files = require.c
 
 var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
   mode: 'history',
-  routes: [{
-    path: '/datadam',
-    name: 'datadam',
-    component: __WEBPACK_IMPORTED_MODULE_1__components_dam_Data___default.a,
-    meta: {
-      title: 'Data DAM'
-    }
-  }, {
-    path: '/dashboard',
-    name: 'admin',
-    component: __WEBPACK_IMPORTED_MODULE_2__components_admin_Dashboard___default.a,
-    meta: {
-      title: 'Dashboard'
-    }
-  }]
+  routes: __WEBPACK_IMPORTED_MODULE_2__router__["a" /* default */]
 });
 var app = new Vue({
   el: '#app',
@@ -50074,6 +50060,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 // import { DataTables, DataTablesServer } from 'vue-data-tables'
 // Vue.use(DataTables);
 /* harmony default export */ __webpack_exports__["default"] = ({
+  title: 'Data DAM',
   data: function data() {
     return {
       cruds: [],
@@ -50286,6 +50273,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 // import { DataTables, DataTablesServer } from 'vue-data-tables'
 // Vue.use(DataTables);
 /* harmony default export */ __webpack_exports__["default"] = ({
+  title: 'Dashboard New',
   data: function data() {
     return {
       cruds: [],
@@ -50910,6 +50898,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -50963,7 +50953,28 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _vm._m(0),
+      _c(
+        "li",
+        {
+          staticClass: "site-menu-item",
+          class: { active: _vm.subIsActive("/map_view") }
+        },
+        [
+          _c("router-link", { attrs: { to: "/map_view" } }, [
+            _c("a", [
+              _c("i", {
+                staticClass: "site-menu-icon fa fa-map",
+                attrs: { "aria-hidden": "true" }
+              }),
+              _vm._v(" "),
+              _c("span", { staticClass: "site-menu-title" }, [
+                _vm._v("Full Map View")
+              ])
+            ])
+          ])
+        ],
+        1
+      ),
       _vm._v(" "),
       _c("li", { staticClass: "site-menu-category" }, [_vm._v("Master Data")]),
       _vm._v(" "),
@@ -50990,36 +51001,19 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _vm._m(1),
+      _vm._m(0),
       _vm._v(" "),
-      _vm._m(2),
+      _vm._m(1),
       _vm._v(" "),
       _c("li", { staticClass: "site-menu-category" }, [_vm._v("Help Desk")]),
       _vm._v(" "),
-      _vm._m(3),
+      _vm._m(2),
       _vm._v(" "),
-      _vm._m(4)
+      _vm._m(3)
     ]
   )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "site-menu-item" }, [
-      _c("a", { attrs: { href: "/" } }, [
-        _c("i", {
-          staticClass: "site-menu-icon fa fa-map",
-          attrs: { "aria-hidden": "true" }
-        }),
-        _vm._v(" "),
-        _c("span", { staticClass: "site-menu-title" }, [
-          _vm._v("Full Map View")
-        ])
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -51099,6 +51093,189 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 55 */,
+/* 56 */,
+/* 57 */,
+/* 58 */,
+/* 59 */,
+/* 60 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_dam_Data__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_dam_Data___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_dam_Data__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_admin_Dashboard__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_admin_Dashboard___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_admin_Dashboard__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_MapView__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_MapView___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_MapView__);
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = ([{
+  path: '/datadam',
+  name: 'datadam',
+  component: __WEBPACK_IMPORTED_MODULE_0__components_dam_Data___default.a,
+  meta: {
+    title: 'Data DAM'
+  }
+}, {
+  path: '/dashboard',
+  name: 'admin',
+  component: __WEBPACK_IMPORTED_MODULE_1__components_admin_Dashboard___default.a,
+  meta: {
+    title: 'Dashboard'
+  }
+}, {
+  path: '/map_view',
+  name: 'map_view',
+  component: __WEBPACK_IMPORTED_MODULE_2__components_MapView___default.a,
+  meta: {
+    title: 'Map View'
+  }
+}]);
+
+/***/ }),
+/* 61 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+function getTitle(vm) {
+  var title = vm.$options.title;
+
+  if (title) {
+    return typeof title === 'function' ? title.call(vm) : title;
+  }
+}
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  created: function created() {
+    var title = getTitle(this);
+
+    if (title) {
+      document.title = title;
+    }
+  }
+});
+
+/***/ }),
+/* 62 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(63)
+/* template */
+var __vue_template__ = __webpack_require__(64)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/MapView.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-147911f4", Component.options)
+  } else {
+    hotAPI.reload("data-v-147911f4", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 63 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {
+    console.log('Component mounted.');
+  }
+});
+
+/***/ }),
+/* 64 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "row justify-content-center" }, [
+        _c("div", { staticClass: "col-md-8" }, [
+          _c("div", { staticClass: "card card-default" }, [
+            _c("div", { staticClass: "card-header" }, [
+              _vm._v("Example Component")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body" }, [
+              _vm._v(
+                "\n                    I'm an example componensst.\n                "
+              )
+            ])
+          ])
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-147911f4", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
