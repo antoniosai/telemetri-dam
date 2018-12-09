@@ -1,81 +1,80 @@
 <template>
-    <ul class="site-menu" data-plugin="menu">
-        <li class="site-menu-category">General</li>
 
-        <li class="site-menu-item" :class="{'active' : subIsActive('/dashboard')}">
-            
-            <router-link to="/dashboard">
-                <a>
-                    <i class="site-menu-icon wb-dashboard" aria-hidden="true"></i>
-                    <span class="site-menu-title">Dashboard</span>
-                </a>
-            </router-link>
-            
-        </li>
-        
-        <li class="site-menu-item" :class="{'active' : subIsActive('/map_view')}">
-            
-            <router-link to="/map_view">
-                <a>
-                    <i class="site-menu-icon fa fa-map" aria-hidden="true"></i>
-                    <span class="site-menu-title">Full Map View</span>
-                </a>
-            </router-link>
-            
-        </li>
+    <nav class="pcoded-navbar">
+        <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
+        <div class="pcoded-inner-navbar main-menu">
 
-        <li class="site-menu-category">Master Data</li>
+            <div class="pcoded-navigatio-lavel">Navigation</div>
 
-        <li class="site-menu-item" :class="{'active' : subIsActive('/datadam')}">
-            
-            <router-link to="/datadam">
-                <a>
-                    <i class="site-menu-icon fa fa-map" aria-hidden="true"></i>
-                    <span class="site-menu-title">DATA DAM</span>
+            <ul class="pcoded-item pcoded-left-item">
+                <li class="" :class="{'active' : subIsActive('/dashboard')}">
+                    <router-link to="/dashboard">
+                            <span class="pcoded-micon"><i class="ti-home"></i></span>
+                            <span class="pcoded-mtext">Dashboard</span>
+                            <span class="pcoded-mcaret"></span>
+                    </router-link>
+                </li>
 
-                </a>
-            </router-link>
-        </li>
+                <li class="" :class="{'active' : subIsActive('/map_view')}">
+                    <router-link to="map_view">
+                        <span class="pcoded-micon"><i class="ti-map-alt"></i></span>
+                        <span class="pcoded-mtext" data-i18n="nav.user-profile.user-card">Map View</span>
+                        <span class="pcoded-mcaret"></span>
+                    </router-link>
+                </li>
+            </ul>
 
-        <li class="site-menu-item has-sub">
+            <div class="pcoded-navigatio-lavel">Master Data</div>
+            <ul class="pcoded-item pcoded-left-item">
+                <li class="" :class="{'active' : subIsActive('/datadam')}">
+                    <router-link to="/datadam">
+                            <span class="pcoded-micon"><i class="ti-server"></i></span>
+                            <span class="pcoded-mtext">DAM Management</span>
+                            <span class="pcoded-mcaret"></span>
+                    </router-link>
+                </li>
+                <li class="pcoded-hasmenu pcoded-trigger" dropdown-icon="style1" subitem-icon="style6">
+                    <a href="javascript:void(0)">
+                        <span class="pcoded-micon"><i class="ti-user"></i></span>
+                        <span class="pcoded-mtext" data-i18n="nav.user-profile.main">User Profile</span>
+                        <span class="pcoded-mcaret"></span>
+                    </a>
+                    <ul class="pcoded-submenu open">
+                        <li class="active">
+                            <a href="timeline.html">
+                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                <span class="pcoded-mtext" data-i18n="nav.user-profile.timeline">Timeline</span>
+                                <span class="pcoded-mcaret"></span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="timeline-social.html">
+                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                <span class="pcoded-mtext" data-i18n="nav.user-profile.timeline-social">Timeline Social</span>
+                                <span class="pcoded-mcaret"></span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="user-profile.html">
+                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                <span class="pcoded-mtext" data-i18n="nav.user-profile.user-profile">User Profile</span>
+                                <span class="pcoded-mcaret"></span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="user-card.html">
+                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                <span class="pcoded-mtext" data-i18n="nav.user-profile.user-card">User Card</span>
+                                <span class="pcoded-mcaret"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
 
-            <a href="index.html">
-                <i class="site-menu-icon fa fa-users" aria-hidden="true"></i>
-                <span class="site-menu-title">User Management</span>
-            </a>
-            
-        </li>
+        </div>
+    </nav>
 
-        <li class="site-menu-item has-sub">
-
-            <a href="index.html">
-                <i class="site-menu-icon fa fa-wrench" aria-hidden="true"></i>
-                <span class="site-menu-title">Setting</span>
-            </a>
-            
-        </li>
-
-        <li class="site-menu-category">Help Desk</li>
-
-        <li class="site-menu-item">
-
-            <a href="/">
-                <i class="site-menu-icon fa fa-cog" aria-hidden="true"></i>
-                <span class="site-menu-title">Technical Support</span>
-            </a>
-            
-        </li>
-
-        <li class="site-menu-item">
-
-            <a href="/">
-                <i class="site-menu-icon fa fa-book" aria-hidden="true"></i>
-                <span class="site-menu-title">Manual</span>
-            </a>
-            
-        </li>
-
-    </ul>
 
 </template>
 
