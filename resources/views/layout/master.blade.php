@@ -21,6 +21,9 @@
     <meta name="keywords" content="flat ui, Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
     <meta name="author" content="#">
 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+
     <link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon">
 
     <link href="https://fonts.googleapis.com/css?family=Mada:300,400,500,600,700" rel="stylesheet">
@@ -54,17 +57,16 @@
     <link rel="stylesheet" type="text/css" href="/assets/css/simple-line-icons.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/ionicons.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/jquery.mCustomScrollbar.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/nprogress@0.2.0/nprogress.css">
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
 
-<body>
+<body class="">
 
     <div id="app">
-        <div class="theme-loader">
-            <div class="ball-scale">
-                <div></div>
-            </div>
-        </div>
-
+        <page-loader></page-loader>
 
         <div id="pcoded" class="pcoded">
             <div class="pcoded-overlay-box"></div>
@@ -517,12 +519,15 @@
                             <div class="pcoded-inner-content">
                                 <div class="main-body">
                                     <div class="page-wrapper">
-                                        <div class="page-header">
+                                        {{-- <div class="page-header">
                                             <div class="page-header-title">
                                                 <h4 id="judul"></h4>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <div class="page-body">
+                                            {{-- <passport-clients></passport-clients> --}}
+                                            {{-- <passport-authorized-clients></passport-authorized-clients> --}}
+                                            {{-- <passport-personal-access-tokens></passport-personal-access-tokens> --}}
                                             <router-view></router-view>
                                             
                                         </div>
@@ -631,6 +636,10 @@
     <script src="/assets/js/demo-12.js"></script>
     <script src="/assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="/assets/js/jquery.mousewheel.min.js"></script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <script src="https://unpkg.com/nprogress@0.2.0/nprogress.js"></script>
 
     <script src="/js/app.js"></script>
 

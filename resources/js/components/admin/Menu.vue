@@ -22,6 +22,22 @@
                         <span class="pcoded-mcaret"></span>
                     </router-link>
                 </li>
+
+                <li class="" :class="{'active' : subIsActive('/login')}">
+                    <router-link to="login">
+                        <span class="pcoded-micon"><i class="ti-map-alt"></i></span>
+                        <span class="pcoded-mtext" data-i18n="nav.user-profile.user-card">Login</span>
+                        <span class="pcoded-mcaret"></span>
+                    </router-link>
+                </li>
+
+                <li class="" :class="{'active' : subIsActive('/register')}">
+                    <router-link to="register">
+                        <span class="pcoded-micon"><i class="ti-map-alt"></i></span>
+                        <span class="pcoded-mtext" data-i18n="nav.user-profile.user-card">Register</span>
+                        <span class="pcoded-mcaret"></span>
+                    </router-link>
+                </li>
             </ul>
 
             <div class="pcoded-navigatio-lavel">Master Data</div>

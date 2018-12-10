@@ -1,58 +1,62 @@
-
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
-require('./bootstrap');
-
-window.Vue = require('vue');
+import Vue from 'vue';
 
 import VueRouter from 'vue-router';
+import axios from 'axios';
+import VueAxios from 'vue-axios';
+// import NProgress from 'vue-nprogress'
 
-//Additional from Me
-import titleMixin from './titleMixin'
 import configRouter from './router';
+import titleMixin from './titleMixin';
 
-// import MenuAdmin from './components/admin/Menu'
-
-Vue.mixin(titleMixin)
 Vue.use(VueRouter);
+Vue.use(VueAxios, axios);
+Vue.use(NProgress);
+Vue.mixin(titleMixin);
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
+Vue.component('menu-admin', require('./components/admin/Menu.vue'))
+Vue.component('page-loader', require('./components/page/Loader.vue'))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
-Vue.component('data-dam', require('./components/dam/Data.vue'));
+Vue.component(
+    'passport-clients',
+    require('./components/passport/Clients.vue')
+);
 
-//Full Maps View
-Vue.component('full-map', require('./components/MapView.vue'));
+Vue.component(
+    'passport-authorized-clients',
+    require('./components/passport/AuthorizedClients.vue')
+);
 
-//Menu Admin
-Vue.component('menu-admin', require('./components/admin/Menu.vue'));
+Vue.component(
+    'passport-personal-access-tokens',
+    require('./components/passport/PersonalAccessTokens.vue')
+);
 
-
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key)))
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
+axios.defaults.baseURL = 'http://localhost:8000/api/';
 
 const router = new VueRouter({
     mode: 'history',
     routes: configRouter,
 });
+
+router.beforeResolve((to, from, next) => {
+    if(to.path) {
+        NProgress.start()
+    }
+    next()
+});
+
+
+router.afterEach((to, from, next) => {
+    NProgress.done()
+});
+
+
+Vue.router = router
+
 const app = new Vue({
     el: '#app',
-    router
+    data: {
+    },
+    router,
+    axios
 });
