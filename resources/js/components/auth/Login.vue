@@ -32,7 +32,7 @@
     export default {
         data(){
             return {
-                email: null,
+                username: null,
                 password: null,
                 error: false
             }

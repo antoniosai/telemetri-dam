@@ -61,6 +61,7 @@
     <link rel="stylesheet" href="https://unpkg.com/nprogress@0.2.0/nprogress.css">
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
 </head>
 
 <body class="">

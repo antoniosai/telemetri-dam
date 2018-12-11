@@ -23,9 +23,6 @@
     },
     "dependencies": {
         "@websanova/vue-auth": "^2.21.14-beta",
-        "admin-lte": "^3.0.0-alpha",
-        "vue-data-tables": "^3.4.4",
-        "vue-loading-spinner": "^1.0.11",
-        "vue-nprogress": "^0.1.5"
+        "vue-tables-2": "^1.4.70"
     }
 }

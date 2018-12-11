@@ -9,7 +9,7 @@
                             <i class="icofont icofont-database"></i>
                         </li>
                         <li class="text-right">
-                            <small>133/211</small>
+                            <small>133/<small>211</small></small>
                         </li>
                     </ul>
                     <br/>
@@ -25,7 +25,7 @@
                         <li>
                             <i class="icofont icofont-user"></i>
                         </li>
-                        <li class="text-right text-warning">
+                        <li class="text-right">
                             23
                         </li>
                     </ul>
@@ -42,7 +42,7 @@
                         <li>
                             <i class="icofont icofont-files"></i>
                         </li>
-                        <li class="text-right text-success">
+                        <li class="text-right">
                             240
                         </li>
                     </ul>
@@ -56,16 +56,15 @@
         <div class="col-md-3">
             <div class="card client-blocks danger-border">
                 <div class="card-block">
-                    <h5>Open Projects</h5>
+                    <h5>User Registered</h5>
                     <ul>
                         <li>
-                            <i class="icofont icofont-ui-folder"></i>
+                            <i class="icofont icofont-user"></i>
                         </li>
-                        <li class="text-right text-danger">
-                            169
+                        <li class="text-right">
+                            23
                         </li>
                     </ul>
-
                     <br/>
                     <router-link class="btn btn-sm btn-danger btn-block" :to="{name:'datadam'}">See More</router-link>
                 </div>

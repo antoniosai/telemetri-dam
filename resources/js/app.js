@@ -3,16 +3,21 @@ import VueRouter from 'vue-router';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 
+import {ServerTable, ClientTable, Event} from 'vue-tables-2';
 import titleMixin from './titleMixin';
 import configRouter from './router';
 
+Vue.use(ClientTable, {}, false, 'bootstrap4');
+
 Vue.mixin(titleMixin);
 Vue.use(VueRouter);
-var axios_ = Vue.use(VueAxios, axios);
+Vue.use(VueAxios, axios);
+window.axios = axios;
 
 axios.defaults.baseURL = 'http://localhost:8000/api';
 
 Vue.component('menu-admin', require('./components/admin/Menu.vue'))
+
 
 //Page Layout
 Vue.component('navigation-bar', require('./components/page/NavigationBar.vue'))
@@ -68,5 +73,5 @@ const app = new Vue({
     	this.getInfo();
     },
     router,
-    axios_
+    axios
 });

@@ -1,15 +1,12 @@
 <?php
 
-namespace App\Model;
+namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 use App\Services\VueTablesInterface;
 
-
-class Bendungan extends Model implements VueTablesInterface
+class EloquentVueTables implements VueTablesInterface
 {
-    protected $table = 'bendungan';
-
     public function get($model, array $fields)
     {
         extract(request()->only(['query', 'limit', 'page', 'orderBy', 'ascending', 'byColumn']));
@@ -65,5 +62,4 @@ class Bendungan extends Model implements VueTablesInterface
             }
         });
     }
-
 }

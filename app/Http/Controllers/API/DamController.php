@@ -11,6 +11,9 @@ class DamController extends Controller
 {
     public function index(Request $request)
     {
+
+        // return Dam::get();
+
         if ( $request->input('client') ) {
     	    return Dam::select('id', 'kode_bendungan', 'nama', 'keterangan', 'alamat')->get();
         }
@@ -33,7 +36,8 @@ class DamController extends Controller
             });
         }
 
-        $dam = $query->paginate($length);
-        return ['data' => $dam, 'draw' => $request->input('draw')];
+        // $dam = $query->paginate($length);
+        $dam = ['data' => Dam::all()];
+        return ['data' => $dam, 'draw' => $request->input('draw'), 'count' => Dam::count()];
     }
 }

@@ -23,7 +23,8 @@
 
                                     <div class="page-body">
 
-                                        <router-view></router-view>
+                                                <router-view></router-view>
+
                                         
                                     </div>
                                 </div>
