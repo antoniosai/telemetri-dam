@@ -176,8 +176,6 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         //3rd party
-        Laravel\Passport\PassportServiceProvider::class,
-
 
     ],
 

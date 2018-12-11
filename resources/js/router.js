@@ -13,7 +13,7 @@ export default [
         name: 'datadam',
         component: DataDam,
         meta: {
-            auth: false
+            auth: true
         }
     },
     {
@@ -21,7 +21,7 @@ export default [
         name: 'admin',
         component: AdminDashboard,
         meta: {
-            auth: false
+            auth: true
         }
     },
     {
@@ -29,7 +29,7 @@ export default [
         name: 'map_view',
         component: MapView,
         meta: {
-            auth: false
+            auth: true
         }
     },
 
@@ -37,6 +37,11 @@ export default [
     {
         path: '/login',
         name: 'login',
+        component: Login
+    },
+    {
+        path: '/user/profile',
+        name: 'user_profile',
         component: Login
     },
     {

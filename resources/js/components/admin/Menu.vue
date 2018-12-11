@@ -7,32 +7,32 @@
             <div class="pcoded-navigatio-lavel">Navigation</div>
 
             <ul class="pcoded-item pcoded-left-item">
-                <li class="" :class="{'active' : subIsActive('/dashboard')}">
-                    <router-link to="/dashboard">
+                <li class="" :class="{'active' : subIsActive('/dashboard')}" v-if="$auth.check()" >
+                    <router-link :to="{ name: 'admin' }">
                             <span class="pcoded-micon"><i class="ti-home"></i></span>
                             <span class="pcoded-mtext">Dashboard</span>
                             <span class="pcoded-mcaret"></span>
                     </router-link>
                 </li>
 
-                <li class="" :class="{'active' : subIsActive('/map_view')}">
-                    <router-link to="map_view">
+                <li class="" :class="{'active' : subIsActive('/map_view')}" v-if="$auth.check()" >
+                    <router-link :to="{ name: 'map_view' }">
                         <span class="pcoded-micon"><i class="ti-map-alt"></i></span>
                         <span class="pcoded-mtext" data-i18n="nav.user-profile.user-card">Map View</span>
                         <span class="pcoded-mcaret"></span>
                     </router-link>
                 </li>
 
-                <li class="" :class="{'active' : subIsActive('/login')}">
-                    <router-link to="login">
+                <li class="" :class="{'active' : subIsActive('/login')}" v-if="!$auth.check()" >
+                    <router-link :to="{ name: 'login' }">
                         <span class="pcoded-micon"><i class="ti-map-alt"></i></span>
                         <span class="pcoded-mtext" data-i18n="nav.user-profile.user-card">Login</span>
                         <span class="pcoded-mcaret"></span>
                     </router-link>
                 </li>
 
-                <li class="" :class="{'active' : subIsActive('/register')}">
-                    <router-link to="register">
+                <li class="" :class="{'active' : subIsActive('/register')}" v-if="!$auth.check()" >
+                    <router-link :to="{ name: 'register' }">
                         <span class="pcoded-micon"><i class="ti-map-alt"></i></span>
                         <span class="pcoded-mtext" data-i18n="nav.user-profile.user-card">Register</span>
                         <span class="pcoded-mcaret"></span>
@@ -42,14 +42,14 @@
 
             <div class="pcoded-navigatio-lavel">Master Data</div>
             <ul class="pcoded-item pcoded-left-item">
-                <li class="" :class="{'active' : subIsActive('/datadam')}">
-                    <router-link to="/datadam">
+                <li class="" :class="{'active' : subIsActive('/datadam')}" v-if="$auth.check()" >
+                    <router-link :to="{ name: 'datadam' }">
                             <span class="pcoded-micon"><i class="ti-server"></i></span>
                             <span class="pcoded-mtext">DAM Management</span>
                             <span class="pcoded-mcaret"></span>
                     </router-link>
                 </li>
-                <li class="pcoded-hasmenu pcoded-trigger" dropdown-icon="style1" subitem-icon="style6">
+                <li class="pcoded-hasmenu pcoded-trigger" dropdown-icon="style1" subitem-icon="style6" v-if="$auth.check()" >
                     <a href="javascript:void(0)">
                         <span class="pcoded-micon"><i class="ti-user"></i></span>
                         <span class="pcoded-mtext" data-i18n="nav.user-profile.main">User Profile</span>

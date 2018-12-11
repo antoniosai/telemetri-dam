@@ -1,68 +1,74 @@
 <?php
+
 namespace App\Http\Controllers;
-use Illuminate\Http\Request; 
-use App\Http\Controllers\Controller; 
-use App\User; 
-use Illuminate\Support\Facades\Auth; 
-use Validator;
-class AuthController extends Controller 
+
+use Auth;
+use JWTAuth;
+use App\User;
+use App\Http\Requests\RegisterFormRequest;
+use Illuminate\Http\Request;
+
+class AuthController extends Controller
 {
+    public function register(RegisterFormRequest $request)
+    {
+        $user = new User;
+        $user->email = $request->email;
+        $user->name = $request->name;
+        $user->password = bcrypt($request->password);
+        $user->save();
 
-public $successStatus = 200;
-/** 
-     * login api 
-     * 
-     * @return \Illuminate\Http\Response 
-     */ 
-    public function login(){ 
-        if(Auth::attempt(['email' => request('email'), 'password' => request('password')])){ 
-            $user = Auth::user(); 
-            $success['token'] =  $user->createToken('TelemetriDAM')->accessToken; 
-
-            $data = [
-                'status' => 'success',
-                'user' => Auth::user(),
-                'data' => $success
-            ];
-
-
-            return response()->json($data, $this->successStatus); 
-        } 
-        else{ 
-            return response()->json(['error'=>'Unauthorised'], 401); 
-        } 
+        return response([
+            'status' => 'success',
+            'data' => $user
+        ], 200);
     }
-/** 
-     * Register api 
-     * 
-     * @return \Illuminate\Http\Response 
-     */ 
-    public function register(Request $request) 
-    { 
-        $validator = Validator::make($request->all(), [ 
-            'name' => 'required', 
-            'email' => 'required|email', 
-            'password' => 'required', 
-            'c_password' => 'required|same:password', 
-        ]);
-if ($validator->fails()) { 
-            return response()->json(['error'=>$validator->errors()], 401);            
+
+    public function login(Request $request)
+    {
+        $credentials = $request->only('username', 'password');
+
+        if ( ! $token = JWTAuth::attempt($credentials)) {
+            return response([
+                'status' => 'error',
+                'error' => 'invalid.credentials',
+                'msg' => 'Invalid Credentials.'
+            ], 400);
         }
-$input = $request->all(); 
-        $input['password'] = bcrypt($input['password']); 
-        $user = User::create($input); 
-        $success['token'] =  $user->createToken('MyApp')->accessToken; 
-        $success['name'] =  $user->name;
-return response()->json(['success'=>$success], $this->successStatus); 
+
+        return response([
+            'status' => 'success'
+        ])
+        ->header('Authorization', $token);
     }
-/** 
-     * details api 
-     * 
-     * @return \Illuminate\Http\Response 
-     */ 
-    public function details() 
-    { 
-        $user = Auth::user(); 
-        return response()->json(['success' => $user], $this->successStatus); 
-    } 
+
+    public function user(Request $request)
+    {
+        $user = User::find(Auth::user()->id);
+
+        return response([
+            'status' => 'success',
+            'data' => $user
+        ]);
+    }
+
+    public function refresh()
+    {
+        return response([
+            'status' => 'success'
+        ]);
+    }
+
+    public function logout()
+    {
+        JWTAuth::invalidate();
+
+        // return redirect('/login');
+
+        return response([
+            'status' => 'success',
+            'msg' => 'Logged out Successfully.'
+        ], 200);
+    }
+
 }
