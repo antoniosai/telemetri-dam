@@ -5,13 +5,7 @@
                 <div class="card card-default">
 
                     <div class="card-header">
-                        <h4>Data DAM</h4>
-                    </div>
-
-                    <div class="clearfix">
-                        <div class="pull-right">
-                            <router-link :to="{name: 'dam.register'}" class="btn btn-md btn-primary">Register New Dam</router-link>
-                        </div>
+                        <h4>List of File ARR @Logung Kudus</h4>
                     </div>
 
                     <div class="card-body">
@@ -55,7 +49,7 @@
 
         methods: {
             getDam(url = '/dam') {
-                axios.get(url, {params: this.tableData})
+                axios.get(url, { headers: {'Access-Control-Allow-Origin': '*'} } )
                 .then(response => {
                     let data = response.data;
                         this.dam = data.data.data;

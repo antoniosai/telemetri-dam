@@ -31,3 +31,7 @@ Route::group(['middleware' => 'jwt.refresh'], function(){
 });
 
 Route::resource('dam', 'API\DamController');
+
+Route::group(['prefix' => 'site_dam'], function(){
+	Route::post('register', 'API\DamController@register')->name('dam.register');
+});

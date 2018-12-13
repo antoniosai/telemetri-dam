@@ -40,4 +40,25 @@ class DamController extends Controller
         $dam = ['data' => Dam::all()];
         return ['data' => $dam, 'draw' => $request->input('draw'), 'count' => Dam::count()];
     }
+
+    public function register(Request $request)
+    {
+        $data = $request->all();
+
+        return response()->json($data);
+    }
+
+    protected function generateToken()
+    {
+        $token = bin2hex(random_bytes(16));
+
+        return $token;
+    }
+
+    protected function generateDamCode($name)
+    {
+        $token = bin2hex(random_bytes(32));
+
+        return $token;
+    }
 }

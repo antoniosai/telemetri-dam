@@ -17,10 +17,8 @@ class CreateInfosTable extends Migration
             $table->increments('id');
             $table->string('nama_sistem');
             $table->integer('target_bendungan');
-            $table->text('dukungan_teknis');
-            $table->text('kontak_kami');
-            $table->text('tentang_kami');
             $table->string('logo');
+            $table->string('host');
         });
     }
 

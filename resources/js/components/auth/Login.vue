@@ -57,7 +57,7 @@
                         toastr.error(resp.response.data.msg)
                     },
                     rememberMe: true,
-                    redirect: '/',
+                    redirect: '/dashboard',
                     fetchUser: true,
                 });             
             },

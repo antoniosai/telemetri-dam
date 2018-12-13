@@ -4,10 +4,32 @@ import Login from './components/auth/Login'
 import Register from './components/auth/Register'
 
 import DataDam from './components/dam/Data'
+import RegisterDam from './components/dam/Add'
+
+import Monitor from './components/monitor/Index'
+
 import AdminDashboard from './components/admin/Dashboard'
 import MapView from './components/MapView'
 
 export default [
+    {
+        path: '/dashboard',
+        name: 'admin',
+        component: AdminDashboard,
+        meta: {
+            auth: true
+        }
+    },
+    //Monitor
+    {
+        path: '/monitor',
+        name: 'monitor',
+        component: Monitor,
+        meta: {
+            auth: true
+        }
+    },
+    //Dam
     {
         path: '/datadam',
         name: 'datadam',
@@ -17,13 +39,14 @@ export default [
         }
     },
     {
-        path: '/dashboard',
-        name: 'admin',
-        component: AdminDashboard,
+        path: '/datadam/register',
+        name: 'dam.register',
+        component: RegisterDam,
         meta: {
             auth: true
         }
     },
+    
     {
         path: '/map_view',
         name: 'map_view',

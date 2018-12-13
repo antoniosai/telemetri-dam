@@ -128,18 +128,9 @@
     <script type="text/javascript" src="/assets/js/moment.min.js"></script>
     <script type="text/javascript" src="/assets/pages/widget/calender/pignose.calendar.min.js"></script>
 
-
-    <script src="/assets/js/c3.js"></script>
     <script type="text/javascript" src="/assets/js/classie.js"></script>
 
-    <script src="/assets/pages/chart/knob/jquery.knob.js"></script>
     <script type="text/javascript" src="/assets/pages/widget/jquery.sparkline.js"></script>
-
-    <script src="/assets/js/d3.js"></script>
-    <script src="/assets//js/rickshaw.js"></script>
-
-    <script src="/assets//js/raphael.min.js"></script>
-    <script src="/assets/js/morris.js"></script>
 
     <script src="/assets/pages/chart/float/jquery.flot.js"></script>
     <script src="/assets/pages/chart/float/jquery.flot.categories.js"></script>
@@ -147,27 +138,18 @@
 
     <script type="text/javascript" src="/assets/pages/dashboard/horizontal-timeline/js/main.js"></script>
 
-    <script type="text/javascript" src="/assets/pages/dashboard/amchart/js/amcharts.js"></script>
-    <script type="text/javascript" src="/assets/pages/dashboard/amchart/js/serial.js"></script>
-    <script type="text/javascript" src="/assets/pages/dashboard/amchart/js/light.js"></script>
-    <script type="text/javascript" src="/assets/pages/dashboard/amchart/js/custom-amchart.js"></script>
-
-    <script type="text/javascript" src="/assets/js/i18next.min.js"></script>
-    <script type="text/javascript" src="/assets/js/i18nextXHRBackend.min.js"></script>
-    <script type="text/javascript" src="/assets/js/i18nextBrowserLanguageDetector.min.js"></script>
-    <script type="text/javascript" src="/assets/js/jquery-i18next.min.js"></script>
-
     <script type="text/javascript" src="/assets/pages/dashboard/custom-dashboard.js"></script>
 
+    
     <script src="/assets/js/pcoded.min.js"></script>
     <script src="/assets/js/demo-12.js"></script>
     <script src="/assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="/assets/js/jquery.mousewheel.min.js"></script>
-
+    
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
+    
     <script src="https://unpkg.com/nprogress@0.2.0/nprogress.js"></script>
-
+    
     <script src="/js/app.js"></script>
 
 </body>

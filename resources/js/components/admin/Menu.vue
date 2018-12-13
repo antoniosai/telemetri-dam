@@ -23,6 +23,14 @@
                     </router-link>
                 </li>
 
+                <li class="" :class="{'active' : subIsActive('/monitor')}" v-if="$auth.check()" >
+                    <router-link :to="{ name: 'monitor' }">
+                        <span class="pcoded-micon"><i class="ti-desktop"></i></span>
+                        <span class="pcoded-mtext" data-i18n="nav.user-profile.user-card">Monitoring</span>
+                        <span class="pcoded-mcaret"></span>
+                    </router-link>
+                </li>
+
                 <li class="" :class="{'active' : subIsActive('/login')}" v-if="!$auth.check()" >
                     <router-link :to="{ name: 'login' }">
                         <span class="pcoded-micon"><i class="ti-map-alt"></i></span>

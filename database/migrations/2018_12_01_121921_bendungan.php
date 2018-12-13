@@ -19,9 +19,9 @@ class Bendungan extends Migration
             $table->string('nama');
             $table->string('keterangan')->nullable();
             $table->string('alamat');
-            $table->string('latitude');
-            $table->string('longitude');
-            $table->ipAdress('ip_address')->nullable();
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
+            $table->string('token');
             $table->timestamps();
         });
     }
