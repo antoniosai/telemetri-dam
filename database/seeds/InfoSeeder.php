@@ -16,7 +16,7 @@ class InfoSeeder extends Seeder
         $data = [
             'nama_sistem' => 'Telemetri DAM',
             'host' => $this->getHostIpAddress(),
-            'logo' => 'asssets/img/logo-bws.png',
+            'logo' => '/assets/images/logo-bws.png',
             'target_bendungan' => rand(300, 500),
         ];
 

@@ -15,7 +15,25 @@
                     </div>
 
                     <div class="card-body">
-                        <v-client-table :data="dam" :columns="columns" :options="options"></v-client-table>
+                        <vue-good-table :columns="columns" :rows="dam" :search-options="options.search":pagination-options="options.pagination">
+                            <template slot="table-row" slot-scope="props">
+                                <span v-if="props.column.field == 'kode_bendungan'">
+                                    <span class="badge badge-primary">{{props.row.kode_bendungan}}</span> 
+                                </span>
+                                <span v-if="props.column.field == 'nama'">
+                                    <span style="font-weight: bold; color: red;">{{props.row.nama}}</span> 
+                                </span>
+                                <span v-if="props.column.field == 'created_at'">
+                                    <span style="font-weight: bold; color: red;">{{props.row.created_at}}</span> 
+                                </span>
+                                <span v-else-if="props.column.field == 'after'">
+                                    <router-link to="/dashboard" class="btn btn-mini btn-warning"><i class="fa fa-pencil fa-lg"></i> Edit</router-link>
+                                    <router-link to="/dashboard" class="btn btn-mini btn-danger"><i class="fa fa-trash fa-lg"></i> Edit</router-link>
+                                </span>
+                                
+                            </template>
+                        </vue-good-table>
+                        <!-- <v-client-table :data="dam" :columns="columns" :options="options"></v-client-table> -->
                     </div>
                 </div>
             </div>
@@ -25,6 +43,11 @@
 </template>
 
 <script>
+import 'vue-good-table/dist/vue-good-table.css'
+
+    import { VueGoodTable } from 'vue-good-table';
+
+
     export default {
     
 
@@ -32,8 +55,54 @@
         data: () => ({
             title: '',
             dam: [],
-            columns: ['kode_bendungan', 'nama', 'alamat'],
+            columns: [
+                {
+                    label: 'Kode Bendungan',
+                    field: 'kode_bendungan',
+                    filterOptions: {
+                    enabled: true, // enable filter for this column
+                        placeholder: 'Filter Kode Bendungan', // placeholder for filter input
+                        filterValue: '', // initial populated value for this filter
+                        filterDropdownItems: [], // dropdown (with selected values) instead of text input
+                        filterFn: this.columnFilterFn, //custom filter function that
+                        trigger: 'enter', //only trigger on enter not on keyup 
+                        filterDropdownItems: ['KUDUS-1', 'BENDO-1']
+                    },
+                    width: '250px'
+                }, 
+                {
+                    label: 'Nama Bendungan',
+                    field: 'nama',
+                }, 
+                {
+                    label: '',
+                    field: 'after',
+                    // field: 'created_at',
+                    // type: 'date',
+                    // dateInputFormat: 'YYYY-MM-DD',
+                    // dateOutputFormat: 'MMM Do YY',
+                }
+            ],
             options: {
+                pagination: {
+                    enabled: true,
+                    mode: 'records',
+                    perPage: 10,
+                    position: 'bottom',
+                    perPageDropdown: [10, 20, 50, 100],
+                    dropdownAllowAll: false,
+                    setCurrentPage: 2,
+                    nextLabel: 'next',
+                    prevLabel: 'prev',
+                    rowsPerPageLabel: 'Rows per page',
+                    ofLabel: 'of',
+                    pageLabel: 'page', // for 'pages' mode
+                    allLabel: 'All',
+                },
+                search: {
+                    enabled: true,
+                    initialSortBy: {field: 'kode_bendungan', type: 'asc'}
+                }
                 
             }
         }),
@@ -66,26 +135,9 @@
                 });
             },
 
-            configPagination(data) {
-                this.pagination.lastPage = data.last_page;
-                this.pagination.currentPage = data.current_page;
-                this.pagination.total = data.total;
-                this.pagination.lastPageUrl = data.last_page_url;
-                this.pagination.nextPageUrl = data.next_page_url;
-                this.pagination.prevPageUrl = data.prev_page_url;
-                this.pagination.from = data.from;
-                this.pagination.to = data.to;
-            },
-            sortBy(key) {
-                this.sortKey = key;
-                this.sortOrders[key] = this.sortOrders[key] * -1;
-                this.tableData.column = this.getIndex(this.columns, 'name', key);
-                this.tableData.dir = this.sortOrders[key] === 1 ? 'asc' : 'desc';
-                this.getDam();
-            },
-            getIndex(array, key, value) {
-                return array.findIndex(i => i[key] == value)
-            },
+        },
+        components: {
+            VueGoodTable,
         }
     } 
 </script>

@@ -12,7 +12,7 @@
                 <div class="alert alert-danger" v-if="error">
                     <p>There was an error, unable to sign in with those credentials.</p>
                 </div>
-                <form autocomplete="off" @submit.prevent="login">
+                <form autocomplete="off" @submit.prevent="login" method="POST">
                     <div class="form-group">
                         <label for="username">E-mail</label>
                         <input type="text" id="username" class="form-control" placeholder="Username" v-model="username" required>

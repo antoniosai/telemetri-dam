@@ -9,6 +9,7 @@ import RegisterDam from './components/dam/Add'
 import Monitor from './components/monitor/Index'
 
 import AdminDashboard from './components/admin/Dashboard'
+import Info from './components/admin/Info'
 import MapView from './components/MapView'
 
 export default [
@@ -20,6 +21,19 @@ export default [
             auth: true
         }
     },
+
+    //SetInfo
+
+    {
+        path: '/set_info',
+        name: 'info',
+        component: Info,
+        meta: {
+            auth: true
+        }
+    },
+
+
     //Monitor
     {
         path: '/monitor',

@@ -9,8 +9,8 @@
                     <i class="ti-search"></i>
                 </a>
                 <a href="index.html" style="font-size: 18px; font-family: Nunito">
-                    <img class="img-fluid" src="/assets/images/logo-bws.png" style="width: 40px" alt="Theme-Logo" />
-                    &nbsp;Telemetri DAM
+                    <img class="img-fluid"  v-bind:src="$store.state.info.logo"  style="width: 40px" alt="Theme-Logo" />
+                    &nbsp;{{ $store.state.info.nama_sistem }}
                 </a>
                 <a class="mobile-options">
                     <i class="ti-more"></i>
