@@ -5,15 +5,12 @@
                 <div class="card card-default">
 
                     <div class="card-header">
-                        <h4>Register New Dam</h4>
+                        <h4>Register Dam {{ form.nama }}</h4>
                     </div>
 
                     <div class="card-body">
 
                         <div class="row">
-
-                            
-
 
                             <div class="col-md-8">
                                 <form autocomplete="off" @submit.prevent="save">
@@ -26,15 +23,32 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="kode_bendungan"><span style="color: red"><strong>*)</strong></span> Nama Bendungan</label>
-                                                <input type="text" name="nama" id="nama" v-model="form.nama" class="form-control">
+                                                <label for="nama"><span style="color: red"><strong>*)</strong></span> Nama Bendungan</label>
+                                                <input type="text" name="nama" id="nama" v-model="form.nama" class="form-control" required>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="ip_address">IP Address</label>
-                                                <input type="text" class="form-control ip" data-mask="999.999.999.999">
-                                                <input type="text" v-model="form.ip_address" name="ip_address" class="form-control ip" data-inputmask="'alias': 'ip'">
+                                                <label for="alamat">Alamat</label>
+                                                <textarea name="alamat" id="alamat" cols="30" rows="4" class="form-control" v-model="form.alamat"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="keterangan">Keterangan</label>
+                                                <textarea name="keterangan" id="keterangan" cols="30" rows="4" class="form-control" v-model="form.keterangan"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="latitude">Latitude</label>
+                                                <input type="text" name="latitude" id="latitude" v-model="form.latitude" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="longitude">Longitude</label>
+                                                <input type="text" name="longitude" id="longitude" v-model="form.longitude" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -56,7 +70,9 @@
                                     </ul>
 
                                 </div>
-                                    <button type="button" @click.prevent="save" class="btn btn-block btn-primary"><i class="fa fa-check"></i> Register</button>
+
+                                <button type="button" @click.prevent="generateToken" class="btn btn-block btn-info btn-outline-info"><i class="fa fa-key"></i> Generate New Token</button>
+                                <button type="button" @click.prevent="save" class="btn btn-block btn-primary"><i class="fa fa-check"></i> Register</button>
                             </div>
                         </div>
 
@@ -76,49 +92,60 @@
     // $(":input").inputmask();
 
     export default {
-    
+
+        props: ['id'],
 
         title: 'Register New DAM',
         data: () => ({
             form: {
-                kode_bendungan: '',
-                nama: '',
-                ip_address: '',
-                keterangan: '',
-                alamat: '',
-                latitude: '',
-                longitude: ''
+                'nama': '',
+                'kode_bendungan': '',
+                'latitude': '',
+                'longitude': '',
+                'alamat': '',
+                'keterangan': ''
             },
         }),
 
         mounted() {
-            // this.getDam()
-            
         },
         
         watch: {
-            // whenever question changes, this function will run
-            title: function () {
-                if(this.title == 'asu')
-                {
-                    alert('santai woy')
-                }
-                console.log('Changed: ' + this.title);
-            }
+
         },
 
         methods: {
+            
             save()
             {
                 let vm = this;
-                
-                axios.post('/dam/save', vm.form)
-                .then(function (response) {
-                    console.log(response);
+
+                swal({
+                    title: "Are you sure?",
+                    text: "of changing " + vm.form.nama + " Dam data",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
                 })
-                .catch(function (error) {
-                    console.log(error);
+                .then((save) => {
+                    if (save) {
+                        axios.post('/dam/save', vm.form)
+                        .then(function (res) {
+                            if(res.data.status == 'success')
+                            {
+                                toastr.success(res.data.message)
+                                vm.$router.push('/datadam');
+                            }
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                    } else {
+                        toastr.info('You cancelled Generating new token')
+                        // swal("Your imaginary file is safe!");
+                    }
                 });
+                
             }
         }
     } 

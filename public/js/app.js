@@ -41222,42 +41222,63 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 // Initialize InputMask
 // $(":input").inputmask();
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['id'],
   title: 'Register New DAM',
   data: function data() {
     return {
       form: {
-        kode_bendungan: '',
-        nama: '',
-        ip_address: '',
-        keterangan: '',
-        alamat: '',
-        latitude: '',
-        longitude: ''
+        'nama': '',
+        'kode_bendungan': '',
+        'latitude': '',
+        'longitude': '',
+        'alamat': '',
+        'keterangan': ''
       }
     };
   },
-  mounted: function mounted() {// this.getDam()
-  },
-  watch: {
-    // whenever question changes, this function will run
-    title: function title() {
-      if (this.title == 'asu') {
-        alert('santai woy');
-      }
-
-      console.log('Changed: ' + this.title);
-    }
-  },
+  mounted: function mounted() {},
+  watch: {},
   methods: {
     save: function save() {
       var vm = this;
-      axios.post('/dam/save', vm.form).then(function (response) {
-        console.log(response);
-      }).catch(function (error) {
-        console.log(error);
+      swal({
+        title: "Are you sure?",
+        text: "of changing " + vm.form.nama + " Dam data",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true
+      }).then(function (save) {
+        if (save) {
+          axios.post('/dam/save', vm.form).then(function (res) {
+            if (res.data.status == 'success') {
+              toastr.success(res.data.message);
+              vm.$router.push('/datadam');
+            }
+          }).catch(function (error) {
+            console.log(error);
+          });
+        } else {
+          toastr.info('You cancelled Generating new token'); // swal("Your imaginary file is safe!");
+        }
       });
     }
   }
@@ -41275,7 +41296,9 @@ var render = function() {
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-md-12" }, [
         _c("div", { staticClass: "card card-default" }, [
-          _vm._m(0),
+          _c("div", { staticClass: "card-header" }, [
+            _c("h4", [_vm._v("Register Dam " + _vm._s(_vm.form.nama))])
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "card-body" }, [
             _c("div", { staticClass: "row" }, [
@@ -41333,7 +41356,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-12" }, [
                         _c("div", { staticClass: "form-group" }, [
-                          _vm._m(1),
+                          _vm._m(0),
                           _vm._v(" "),
                           _c("input", {
                             directives: [
@@ -41345,7 +41368,12 @@ var render = function() {
                               }
                             ],
                             staticClass: "form-control",
-                            attrs: { type: "text", name: "nama", id: "nama" },
+                            attrs: {
+                              type: "text",
+                              name: "nama",
+                              id: "nama",
+                              required: ""
+                            },
                             domProps: { value: _vm.form.nama },
                             on: {
                               input: function($event) {
@@ -41361,34 +41389,27 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-12" }, [
                         _c("div", { staticClass: "form-group" }, [
-                          _c("label", { attrs: { for: "ip_address" } }, [
-                            _vm._v("IP Address")
+                          _c("label", { attrs: { for: "alamat" } }, [
+                            _vm._v("Alamat")
                           ]),
                           _vm._v(" "),
-                          _c("input", {
-                            staticClass: "form-control ip",
-                            attrs: {
-                              type: "text",
-                              "data-mask": "999.999.999.999"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("input", {
+                          _c("textarea", {
                             directives: [
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: _vm.form.ip_address,
-                                expression: "form.ip_address"
+                                value: _vm.form.alamat,
+                                expression: "form.alamat"
                               }
                             ],
-                            staticClass: "form-control ip",
+                            staticClass: "form-control",
                             attrs: {
-                              type: "text",
-                              name: "ip_address",
-                              "data-inputmask": "'alias': 'ip'"
+                              name: "alamat",
+                              id: "alamat",
+                              cols: "30",
+                              rows: "4"
                             },
-                            domProps: { value: _vm.form.ip_address },
+                            domProps: { value: _vm.form.alamat },
                             on: {
                               input: function($event) {
                                 if ($event.target.composing) {
@@ -41396,7 +41417,122 @@ var render = function() {
                                 }
                                 _vm.$set(
                                   _vm.form,
-                                  "ip_address",
+                                  "alamat",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-12" }, [
+                        _c("div", { staticClass: "form-group" }, [
+                          _c("label", { attrs: { for: "keterangan" } }, [
+                            _vm._v("Keterangan")
+                          ]),
+                          _vm._v(" "),
+                          _c("textarea", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.keterangan,
+                                expression: "form.keterangan"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              name: "keterangan",
+                              id: "keterangan",
+                              cols: "30",
+                              rows: "4"
+                            },
+                            domProps: { value: _vm.form.keterangan },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.form,
+                                  "keterangan",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("div", { staticClass: "form-group" }, [
+                          _c("label", { attrs: { for: "latitude" } }, [
+                            _vm._v("Latitude")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.latitude,
+                                expression: "form.latitude"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              name: "latitude",
+                              id: "latitude"
+                            },
+                            domProps: { value: _vm.form.latitude },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.form,
+                                  "latitude",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("div", { staticClass: "form-group" }, [
+                          _c("label", { attrs: { for: "longitude" } }, [
+                            _vm._v("Longitude")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.longitude,
+                                expression: "form.longitude"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              name: "longitude",
+                              id: "longitude"
+                            },
+                            domProps: { value: _vm.form.longitude },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.form,
+                                  "longitude",
                                   $event.target.value
                                 )
                               }
@@ -41410,7 +41546,25 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "col-md-4" }, [
-                _vm._m(2),
+                _vm._m(1),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-block btn-info btn-outline-info",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.generateToken($event)
+                      }
+                    }
+                  },
+                  [
+                    _c("i", { staticClass: "fa fa-key" }),
+                    _vm._v(" Generate New Token")
+                  ]
+                ),
                 _vm._v(" "),
                 _c(
                   "button",
@@ -41439,15 +41593,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h4", [_vm._v("Register New Dam")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("label", { attrs: { for: "kode_bendungan" } }, [
+    return _c("label", { attrs: { for: "nama" } }, [
       _c("span", { staticStyle: { color: "red" } }, [
         _c("strong", [_vm._v("*)")])
       ]),
@@ -45183,7 +45329,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 // $(":input").inputmask();
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['id'],
-  title: 'Register New DAM',
+  title: 'Edit DAM',
   data: function data() {
     return {
       form: []

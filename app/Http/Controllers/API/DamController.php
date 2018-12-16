@@ -58,18 +58,25 @@ class DamController extends Controller
         // return response()->json($data);
         // $data = $request->all();
         $dam = [];
-
+        $token = '';
         if($request->id)
         {
             $dam = Dam::findOrFail($request->id);
             $data['message'] = 'Berhasil mengupdate Data Bendungan ' . $request->nama;
+            $token = $request->token;
+        }
+        else
+        {
+            $dam = new Dam;
+            $data['message'] = 'Berhasil meregister Dam ' . $request->nama;
+            $token = $this->generateToken();
         }
         $dam->nama = $request->nama;
         $dam->kode_bendungan = $request->kode_bendungan;
         $dam->alamat = $request->alamat;
         $dam->latitude = $request->latitude;
         $dam->longitude = $request->longitude;
-        $dam->token = $request->token;
+        $dam->token = $token;
 
         if($dam->save())
         {
@@ -87,7 +94,7 @@ class DamController extends Controller
 
     public function generateToken()
     {
-        $token = bin2hex(random_bytes(16));
+        $token = bin2hex(random_bytes(32));
         return $token;
     }
 

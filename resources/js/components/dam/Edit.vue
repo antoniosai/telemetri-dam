@@ -101,7 +101,7 @@
 
         props: ['id'],
 
-        title: 'Register New DAM',
+        title: 'Edit DAM',
         data: () => ({
             form: [],
         }),
