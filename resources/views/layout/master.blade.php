@@ -149,6 +149,8 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     
     <script src="https://unpkg.com/nprogress@0.2.0/nprogress.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     
     <script src="/js/app.js"></script>
 

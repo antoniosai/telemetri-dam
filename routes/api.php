@@ -30,8 +30,24 @@ Route::group(['middleware' => 'jwt.refresh'], function(){
 	Route::get('auth/refresh', 'AuthController@refresh');
 });
 
-Route::resource('dam', 'API\DamController');
-
-Route::group(['prefix' => 'site_dam'], function(){
-	Route::post('register', 'API\DamController@register')->name('dam.register');
+Route::group(['middleware' => 'jwt.auth'], function(){
+	Route::resource('dam', 'API\DamController');
+	Route::group(['prefix' => 'dam'], function(){
+		Route::get('/detail/{id}', 'API\DamController@detail')->name('dam.detail');
+		Route::post('save', 'API\DamController@save')->name('dam.save');
+	});
+	Route::group(['prefix' => 'site_dam'], function(){
+	});
+	
+	Route::group(['prefix' => 'user_management'], function(){
+		Route::get('/', 'API\UserController@index');
+		Route::post('save', 'API\UserController@save');
+	});
 });
+
+Route::get('/token', function(){
+	$data = bin2hex(random_bytes(32));
+	return response()->json($data);
+});
+Route::get('generate_token', 'API\DamController@token')->name('dam.generate_token');
+

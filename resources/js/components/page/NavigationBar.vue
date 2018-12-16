@@ -16,14 +16,14 @@
                     <i class="ti-more"></i>
                 </a>
             </div>
-            <div class="navbar-container container-fluid">
+            <div class="navbar-container container-fluid" v-if="$auth.check()">
                 <div>
                     <ul class="nav-left">
                         <li>
                             <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
                         </li>
                         <li>
-                        	<a id="txt-time">6:43PM</a>
+                        	<a id="txt-time"></a>
                         </li>
                         
                     </ul>
@@ -55,7 +55,7 @@
                                         <img class="d-flex align-self-center" src="/assets/images/user.png"
                                             alt="Generic placeholder image">
                                         <div class="media-body">
-                                            <h5 class="notification-user">John Doe</h5>
+                                            <h5 class="notification-user">{{ $auth.user().email }}</h5>
                                             <p class="notification-msg">Lorem ipsum dolor sit amet,
                                                 consectetuer elit.</p>
                                             <span class="notification-time">30 minutes ago</span>
@@ -98,7 +98,7 @@
                             <a href="#!">
                                 <img src="/assets/images/user.png"
                                     alt="User-Profile-Image">
-                                <span>John Doe</span>
+                                <span>{{ $auth.user().username }} / {{ $auth.user().email }}</span>
                                 <i class="ti-angle-down"></i>
                             </a>
                             <ul class="show-notification profile-notification">

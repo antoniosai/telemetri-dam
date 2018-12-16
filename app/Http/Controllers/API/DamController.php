@@ -41,17 +41,53 @@ class DamController extends Controller
         return ['data' => $dam, 'draw' => $request->input('draw'), 'count' => Dam::count()];
     }
 
-    public function register(Request $request)
+    public function detail($id)
     {
-        $data = $request->all();
+        $data = Dam::findOrFail($id);
 
         return response()->json($data);
     }
 
-    protected function generateToken()
+    public function save(Request $request)
+    {
+        // $data = [
+            // 'status' => 'success',
+            // 'message' => 'Berhasil mengupdate data bendungan'
+        // ];
+        
+        // return response()->json($data);
+        // $data = $request->all();
+        $dam = [];
+
+        if($request->id)
+        {
+            $dam = Dam::findOrFail($request->id);
+            $data['message'] = 'Berhasil mengupdate Data Bendungan ' . $request->nama;
+        }
+        $dam->nama = $request->nama;
+        $dam->kode_bendungan = $request->kode_bendungan;
+        $dam->alamat = $request->alamat;
+        $dam->latitude = $request->latitude;
+        $dam->longitude = $request->longitude;
+        $dam->token = $request->token;
+
+        if($dam->save())
+        {
+
+            $data = [
+                'status' => 'success',
+                'message' => 'Berhasil mengupdate data bendungan ' . $request->nama
+            ];
+            
+            return response()->json($data);
+        }
+
+        // return response()->json($data);
+    }
+
+    public function generateToken()
     {
         $token = bin2hex(random_bytes(16));
-
         return $token;
     }
 
@@ -60,5 +96,11 @@ class DamController extends Controller
         $token = bin2hex(random_bytes(32));
 
         return $token;
+    }
+
+    public function token()
+    {
+        $token = bin2hex(random_bytes(32));
+        return response()->json($token);
     }
 }

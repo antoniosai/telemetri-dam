@@ -112,7 +112,7 @@
             {
                 let vm = this;
                 
-                axios.post('/site_dam/register', vm.form)
+                axios.post('/dam/save', vm.form)
                 .then(function (response) {
                     console.log(response);
                 })

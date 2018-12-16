@@ -5,6 +5,8 @@ import Register from './components/auth/Register'
 
 import DataDam from './components/dam/Data'
 import RegisterDam from './components/dam/Add'
+import DetailDam from './components/dam/Detail'
+import EditDam from './components/dam/Edit'
 
 import Monitor from './components/monitor/Index'
 
@@ -18,7 +20,7 @@ export default [
         name: 'admin',
         component: AdminDashboard,
         meta: {
-            auth: true
+            auth: {roles: 'admin', redirect: '/login'}
         }
     },
 
@@ -50,6 +52,26 @@ export default [
         component: DataDam,
         meta: {
             auth: true
+        }
+    },
+    {
+        path: '/dam/edit/:id',
+        props: true,
+        name: 'dam.edit',
+        component: EditDam,
+        meta: {
+            auth: true,
+
+        }
+    },
+    {
+        path: '/dam/detail/:id',
+        props: true,
+        name: 'dam.detail',
+        component: DetailDam,
+        meta: {
+            auth: true,
+
         }
     },
     {

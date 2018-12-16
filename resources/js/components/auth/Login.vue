@@ -5,7 +5,7 @@
             
             <div class="card-body">
 
-                <div class="alert alert-success">
+                <div class="alert alert-success background-primary">
                     <p>You have to login before continue</p>
                 </div>
 
@@ -52,6 +52,7 @@
                     }, 
                     success: function () {
                         toastr.success('Berhasil', 'Anda berhasil login')
+                        app.$store.dispatch('getAuthenticatedUser')
                     },
                     error: function (resp) {
                         toastr.error(resp.response.data.msg)

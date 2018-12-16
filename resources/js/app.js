@@ -83,12 +83,6 @@ const app = new Vue({
 
     mounted: function() {
         store.dispatch('getInfo')
-        .then((response) => {
-            console.log('result: ', response)
-        })
-        .catch((error) => {
-            console.log('error: ', error)
-        })
     },
     router,
     axios,

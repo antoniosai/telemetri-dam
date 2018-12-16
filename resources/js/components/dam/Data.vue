@@ -27,8 +27,8 @@
                                     <span style="font-weight: bold; color: red;">{{props.row.created_at}}</span> 
                                 </span>
                                 <span v-else-if="props.column.field == 'after'">
-                                    <router-link to="/dashboard" class="btn btn-mini btn-warning"><i class="fa fa-pencil fa-lg"></i> Edit</router-link>
-                                    <router-link to="/dashboard" class="btn btn-mini btn-danger"><i class="fa fa-trash fa-lg"></i> Edit</router-link>
+                                    <router-link :to="{ name: 'dam.edit', params: {id: props.row.id } }" class="btn btn-mini btn-warning"><i class="fa fa-pencil fa-lg"></i> Edit</router-link>
+                                    <router-link :to="{ name: 'dam.detail', params: {id: props.row.id } }" class="btn btn-mini btn-danger"><i class="fa fa-trash fa-lg"></i> Editsaaaa</router-link>
                                 </span>
                                 
                             </template>
@@ -113,13 +113,7 @@ import 'vue-good-table/dist/vue-good-table.css'
         
         watch: {
             // whenever question changes, this function will run
-            title: function () {
-                if(this.title == 'asu')
-                {
-                    alert('santai woy')
-                }
-            console.log('Changed: ' + this.title);
-            }
+            
         },
 
         methods: {

@@ -1,13 +1,15 @@
-import Axios from "axios";
-
 export default {
-    strict: true,
     state: {
-        info: []
+        info: [],
+        user: [],
     },
     mutations: {
         setInfo(state, info){
             state.info = info
+        },
+
+        setUser(state, user){
+            state.user = user
         }
     },
     actions: {
@@ -25,9 +27,24 @@ export default {
                 });
 
             })
+        },
+        getAuthenticatedUser({commit}) {
+            return new Promise((resolve, reject) => {
+
+                axios.get('/auth/user')
+                .then(function(res){
+                    var data = res.data.data
+
+                    commit('setUser', data )
+
+                    resolve(data);
+                });
+
+            })
         }
     },
     getters: {
-        info: state => state.info
+        info: state => state.info,
+        user: state => state.user
     }
 };
