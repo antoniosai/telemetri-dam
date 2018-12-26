@@ -10,6 +10,11 @@ class Bendungan extends Model implements VueTablesInterface
 {
     protected $table = 'bendungan';
 
+    public function desa()
+    {
+        return $this->belongsTo('App\Model\Desa');
+    }
+
     public function get($model, array $fields)
     {
         extract(request()->only(['query', 'limit', 'page', 'orderBy', 'ascending', 'byColumn']));
@@ -64,6 +69,21 @@ class Bendungan extends Model implements VueTablesInterface
                 $q->{$method}($field, 'LIKE', "%{$query}%");
             }
         });
+    }
+
+    public function kecamatan()
+    {
+        return $this->belongsTo('App\Model\Kecamatan');
+    }
+
+    public function kota()
+    {
+        return $this->belongsTo('App\Model\Kota');
+    }
+
+    public function provinsi()
+    {
+        return $this->belongsTo('App\Model\Provinsi');
     }
 
 }

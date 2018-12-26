@@ -42,6 +42,11 @@ class AuthController extends Controller
         ->header('Authorization', $token);
     }
 
+    public function test()
+    {
+        return JWTAuth::fromUser(User::first());
+    }
+
     public function user(Request $request)
     {
         $user = User::find(Auth::user()->id);

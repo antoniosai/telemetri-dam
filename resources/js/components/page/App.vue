@@ -22,9 +22,13 @@
                                 <div class="page-wrapper">
 
                                     <div class="page-body">
+                                        <div v-if="$auth.ready()">
+                                            <router-view></router-view>
+                                        </div>
 
-                                                <router-view></router-view>
-
+                                        <div v-if="!$auth.ready()">
+                                            Loading ...
+                                        </div>
                                         
                                     </div>
                                 </div>

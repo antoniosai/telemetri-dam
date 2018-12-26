@@ -1,32 +1,23 @@
 //Library
-import Vue from 'vue';
-import Vuex from 'vuex';
-import VueRouter from 'vue-router';
-import axios from 'axios';
-import VueAxios from 'vue-axios';
-import * as VueGoogleMaps from "vue2-google-maps";
-// import {ServerTable, ClientTable, Event} from 'vue-tables-2';
+import Vue from 'vue'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+import * as VueGoogleMaps from "vue2-google-maps"
+import vSelect from 'vue-select'
 
 //Config
-import configVuex from './vuex';
-import titleMixin from './titleMixin';
-import configRouter from './router';
+import store from './store'
+import titleMixin from './titleMixin'
+import router from './router'
+import base_url from './base_url'
+import gmaps_config from './gmaps_config'
 
 Vue.mixin(titleMixin);
-
-Vue.use(Vuex)
-Vue.use(VueGoogleMaps, {
-    load: {
-        key: "AIzaSyCri8tW6KLNE2wL5KsfHrjWrXZ2iqMnlLM",
-        libraries: "places" // necessary for places input
-    }
-});
-// Vue.use(ClientTable, {}, false, 'bootstrap4');
-Vue.use(VueRouter);
 Vue.use(VueAxios, axios);
 
+Vue.use(VueGoogleMaps, gmaps_config);
 
-axios.defaults.baseURL = 'http://localhost:8000/api';
+axios.defaults.baseURL = base_url;
 window.axios = axios;
 
 //Page Layout
@@ -34,13 +25,7 @@ Vue.component('menu-admin', require('./components/admin/Menu.vue'))
 Vue.component('navigation-bar', require('./components/page/NavigationBar.vue'))
 Vue.component('main-app', require('./components/page/App.vue'))
 
-const store = new Vuex.Store(configVuex)
-
-const router = new VueRouter({
-    routes: configRouter
-});
-
-Vue.router = router
+Vue.component('v-select', vSelect)
 
 Vue.use(require('@websanova/vue-auth'), {
     auth: require('@websanova/vue-auth/drivers/auth/bearer.js'),
@@ -48,43 +33,16 @@ Vue.use(require('@websanova/vue-auth'), {
     router: require('@websanova/vue-auth/drivers/router/vue-router.2.x.js'),
 })
 
-router.beforeResolve((to, from, next) => {
-    if(to.path) {
-        NProgress.start()
-    }
-    next()
-});
-
-
-router.afterEach((to, from, next) => {
-    NProgress.done()
-});
-
 const app = new Vue({
     el: '#app',
 
-    data: {
-    	info: []
-    },
+    data: {},
 
-    methods: {
-		getInfo: function() {
-    		var app = this;
-
-			axios.get('/get_info')
-			.then(function (response) {
-
-				var info = response.data;
-
-				app.info = info;
-			})
-    	}
-    },
+    methods: {},
 
     mounted: function() {
         store.dispatch('getInfo')
+        // this.$auth.logout()
     },
-    router,
-    axios,
-    store
+    router, axios, store,
 });

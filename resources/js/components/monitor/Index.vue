@@ -48,7 +48,7 @@
         },
 
         methods: {
-            getDam(url = '/dam') {
+            getDam(url = '/api/dam') {
                 axios.get(url, { headers: {'Access-Control-Allow-Origin': '*'} } )
                 .then(response => {
                     let data = response.data;

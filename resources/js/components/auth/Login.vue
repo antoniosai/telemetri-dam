@@ -46,6 +46,7 @@
             login(){
                 var app = this
                 this.$auth.login({
+                    url: '/api/auth/login',
                     params: {
                         username: app.username,
                         password: app.password

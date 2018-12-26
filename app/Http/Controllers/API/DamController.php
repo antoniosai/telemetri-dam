@@ -37,19 +37,68 @@ class DamController extends Controller
         }
 
         // $dam = $query->paginate($length);
-        $dam = ['data' => Dam::all()];
-        return ['data' => $dam, 'draw' => $request->input('draw'), 'count' => Dam::count()];
+
+        // return Dam::first()->desa->kecamatan->kota->provinsi->nama;
+        $site = [];
+
+        foreach(Dam::all() as $dam)
+        {
+            $last_response = $dam->last_response;
+            $date_response = new \DateTime($last_response);
+
+            $data = [
+                'id' => $dam->id,
+                'nama' => $dam->nama,
+                'kode_bendungan' => $dam->kode_bendungan,
+                'latitude' => $dam->latitude,
+                'longitude' => $dam->longitude,
+                'alamat' => $dam->alamat,
+                'keterangan' => $dam->keterangan,
+                'desa' => $dam->desa['nama'],
+                'kecamatan' => $dam->kecamatan['nama'],
+                'kota' => $dam->kota['nama'],
+                'provinsi' => $dam->provinsi['nama'],
+                'last_response' => \Carbon\Carbon::parse($dam->created_at)->diffForHumans(),
+            ];
+
+            array_push($site, $data);
+        }
+
+        // return $site;
+
+        $dam = ['data' => $site];
+        $json_data= ['data' => $dam, 'draw' => $request->input('draw'), 'count' => Dam::count()];
+
+        return response()->json($json_data);
     }
 
     public function detail($id)
     {
-        $data = Dam::findOrFail($id);
+        $dam = Dam::findOrFail($id);
+
+        $data = [
+            'nama' => $dam->nama,
+            'kode_bendungan' => $dam->kode_bendungan,
+            'alamat' => $dam->alamat,
+            'latitude' => $dam->latitude,
+            'longitude' => $dam->longitude,
+            'keterangan' => $dam->keterangan,
+            'token' => $dam->token,
+            'desa' => $dam->desa['nama'],
+            'kecamatan' => $dam->kecamatan['nama'],
+            'kota' => $dam->kota['nama'],
+            'provinsi' => $dam->provinsi['nama'],
+            'last_response' => $dam->last_response,
+        ];
+
+
 
         return response()->json($data);
     }
 
     public function save(Request $request)
     {
+        // return $request->all();
         // $data = [
             // 'status' => 'success',
             // 'message' => 'Berhasil mengupdate data bendungan'
@@ -76,6 +125,10 @@ class DamController extends Controller
         $dam->alamat = $request->alamat;
         $dam->latitude = $request->latitude;
         $dam->longitude = $request->longitude;
+        $dam->provinsi_id = $request->provinsi_id;
+        $dam->kota_id = $request->kota_id;
+        $dam->kecamatan_id = $request->kecamatan_id;
+        $dam->desa_id = $request->desa_id;
         $dam->token = $token;
 
         if($dam->save())
@@ -109,5 +162,20 @@ class DamController extends Controller
     {
         $token = bin2hex(random_bytes(32));
         return response()->json($token);
+    }
+
+    public function destroy($id)
+    {
+
+        $dam = Dam::findOrFail($id);
+
+        if($dam->delete())
+        {
+            $data = [
+                'status' => 'success',
+                'message' => 'Dam berhasil dihapus'
+            ];
+            return response()->json($data);
+        }
     }
 }

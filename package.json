@@ -24,6 +24,7 @@
     "dependencies": {
         "@websanova/vue-auth": "^2.21.14-beta",
         "vue-good-table": "^2.16.0",
+        "vue-select": "^2.5.1",
         "vue2-google-maps": "^0.10.5",
         "vuex": "^3.0.1"
     }

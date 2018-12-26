@@ -107,7 +107,7 @@
         }),
 
         mounted() {
-            this.getDam()
+            this.getUser()
             
         },
         
@@ -123,11 +123,11 @@
         },
 
         methods: {
-            getDam()
+            getUser()
             {
                 let vm = this;
                 
-                axios.get('/api/dam/detail/'+this.id)
+                axios.get('/api/user_management/detail/'+this.id)
                 .then(function (res) {
                     var data = res.data;
                     vm.form = data

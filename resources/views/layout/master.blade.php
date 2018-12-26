@@ -6,7 +6,7 @@
 <html lang="en">
 
 <head>
-    <title>Mash Able - Premium Admin Template</title>
+    <title>Telemetri DAM</title>
 
 
     <!--[if lt IE 9]>
@@ -61,6 +61,8 @@
     <link rel="stylesheet" href="https://unpkg.com/nprogress@0.2.0/nprogress.css">
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+    <link rel="stylesheet" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/vendors/css/weather-icons/climacons.min.css">
 
 </head>
 
@@ -151,6 +153,7 @@
     <script src="https://unpkg.com/nprogress@0.2.0/nprogress.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+    <script src="//js.maxmind.com/js/apis/geoip2/v2.1/geoip2.js" type="text/javascript"></script>
     
     <script src="/js/app.js"></script>
 

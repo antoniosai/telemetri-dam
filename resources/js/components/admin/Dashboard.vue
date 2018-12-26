@@ -9,7 +9,7 @@
                             <i class="icofont icofont-database"></i>
                         </li>
                         <li class="text-right">
-                            <small>133/<small>211</small></small>
+                            <small>{{ $store.getters.info.total_bendungan }}/<small>{{ $store.getters.info.target_bendungan }}</small></small>
                         </li>
                     </ul>
                     <br/>
@@ -26,7 +26,7 @@
                             <i class="icofont icofont-user"></i>
                         </li>
                         <li class="text-right">
-                            23
+                            {{ $store.getters.info.total_user }}
                         </li>
                     </ul>
                     <br/>
@@ -88,6 +88,7 @@
         },
 
         mounted() {
+            this.$store.dispatch('getInfo')
         }
     }
 </script>

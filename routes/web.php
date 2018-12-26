@@ -20,3 +20,6 @@
 // Route::post('auth/login', 'AuthController@login')->name('login');
 // });
 // Auth::routes();
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

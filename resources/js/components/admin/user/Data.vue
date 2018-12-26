@@ -8,30 +8,29 @@
                         <h5>Draggable Default</h5>
                         <div class="card-header-right">
                             <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal"><i class="fa fa-filter"></i> Panduan Filter</button>
-                            <router-link style="margin-right: 30px" :to="{name: 'dam.register'}" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Register New Dam</router-link>
-
-
-                            
+                            <router-link style="margin-right: 30px" :to="{name: 'user.register'}" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Register New Dam</router-link>
                         </div>
                     </div>
 
                     <div class="card-body">
-                        <vue-good-table :columns="columns" :rows="dam" :search-options="options.search" :pagination-options="options.pagination" :line-numbers="true" styleClass="vgt-table condensed">
+                        <vue-good-table :columns="columns" :rows="user" :search-options="options.search" :pagination-options="options.pagination" :line-numbers="true" styleClass="vgt-table condensed">
                             <template slot="table-row" slot-scope="props">
-                                <span v-if="props.column.field == 'kode_bendungan'">
-                                    <span class="badge badge-primary">{{props.row.kode_bendungan}}</span> 
+                                <span v-if="props.column.field == 'username'">
+                                    <span class="badge badge-primary">{{ '@'+props.row.username}}</span> 
                                 </span>
-                                <span v-if="props.column.field == 'nama'">
-                                    <span><router-link :to="{ name: 'dam.detail', params: {id: props.row.id } }" >{{ props.row.nama }}</router-link></span> 
+                                <span v-if="props.column.field == 'name'">
+                                    <span><router-link :to="{ name: 'user.detail', params: { id: 3 }}">{{ props.row.name }}</router-link></span>
+                                    <!-- <span><router-link :to="{ name: 'user.detail', params: {id_user: props.row.id } }" >{{ props.row.name }}</router-link></span>  -->
                                 </span>
-                                <span v-if="props.column.field == 'provinsi'">
-                                    <span v-if="props.row.provinsi != null">{{props.row.provinsi}}</span>
+                                <span v-if="props.column.field == 'email'">
+                                    <span v-if="props.row.email != null">{{props.row.email}}</span>
                                     <span v-else><label class="label label-default">Belum Diisi</label></span>
                                 </span>
-                                <span v-if="props.column.field == 'kota'">
-                                    <span v-if="props.row.kota != null">{{props.row.kota}}</span>
+                                <span v-if="props.column.field == 'role'">
+                                    <span v-if="props.row.role != null">{{props.row.role}}</span>
                                     <span v-else><label class="label label-default">Belum Diisi</label></span>
                                 </span>
+                                
                                 <span v-else-if="props.column.field == 'status'">
                                     <span class="badge badge-danger">{{ setStatus(props.row.id) }}</span>
                                 </span>
@@ -45,8 +44,8 @@
                                             <i class="fa fa-ellipsis-h"></i>
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <router-link :to="{ name: 'dam.edit', params: {id: props.row.id } }" class="dropdown-item"><i class="fa fa-pencil fa-lg"></i> Edit</router-link>
-                                            <button @click.prevent="deleteDam(props.row.id, props.row.nama)" class="dropdown-item"><i class="fa fa-trash fa-lg"></i> Delete</button>
+                                            <router-link :to="{ name: 'user.edit', params: {id: props.row.id } }" class="dropdown-item"><i class="fa fa-pencil fa-lg"></i> Edit</router-link>
+                                            <button @click.prevent="deleteUser(props.row.id, props.row.name)" class="dropdown-item"><i class="fa fa-trash fa-lg"></i> Delete</button>
                                         </div>
                                     </div>
                                 </span>
@@ -75,26 +74,34 @@ import 'vue-good-table/dist/vue-good-table.css'
         data: () => ({
             title: '',
             provinsi: [],
-            dam: [],
+            user: [],
             columns: [
                 {
-                    label: 'Kode Bendungan',
-                    field: 'kode_bendungan',
+                    label: 'Username',
+                    field: 'username',
                     filterOptions: {
                         enabled: true
                     },
                     width: '120px'
                 }, 
                 {
-                    label: 'Nama Bendungan',
-                    field: 'nama',
+                    label: 'Nama Lengkap',
+                    field: 'name',
                     filterOptions: {
                         enabled: true
                     },
                 },
                 {
-                    label: 'Provinsi',
-                    field: 'provinsi',
+                    label: 'E-Mail',
+                    field: 'email',
+                    filterOptions: {
+                        enabled: true
+                    },
+                },
+                {
+                    label: 'Role',
+                    field: 'role',
+                    width: '120px',
                     filterOptions: {
                         enabled: true, // enable filter for this column
                         placeholder: 'Semua Provinsi', // placeholder for filter input
@@ -103,18 +110,6 @@ import 'vue-good-table/dist/vue-good-table.css'
                         filterFn: this.columnFilterFn, //custom filter function that
                         trigger: 'enter', //only trigger on enter not on keyup 
                     },
-                },
-                {
-                    label: 'Kota/Kabupaten',
-                    field: 'kota',
-                },
-                {
-                    label: '',
-                    field: 'status'
-                },
-                {
-                    label: 'Last Response',
-                    field: 'last_response'
                 },
                 {
                     label: '',
@@ -146,8 +141,8 @@ import 'vue-good-table/dist/vue-good-table.css'
         }),
 
         mounted() {
-            this.getDam()
-            this.listProv()
+            this.getUser()
+            this.listRole()
         },
         
         watch: {
@@ -156,12 +151,13 @@ import 'vue-good-table/dist/vue-good-table.css'
         },
 
         methods: {
-            getDam(url = '/api/dam') {
-                axios.get(url, {params: this.tableData})
-                .then(response => {
-                    let data = response.data;
-                    this.dam = data.data.data;
-                        console.log(data.data.data);
+            getUser(url = '/api/user_management') {
+
+                axios.get(url)
+                .then(res => {
+                    let data = res.data;
+                    this.user = data;
+                    console.log(data);
                 })
                 .catch(errors => {
                     console.log(errors);
@@ -182,18 +178,18 @@ import 'vue-good-table/dist/vue-good-table.css'
                 }
             },
 
-            listProv()
+            listRole()
             {
                 let vm = this
 
-                axios.get('/api/wilayah/nama_provinsi')
+                axios.get('/api/user_management/list_role')
                 .then(res => {
                     console.log(res.data)
-                    vm.columns[2].filterOptions.filterDropdownItems = res.data
+                    vm.columns[3].filterOptions.filterDropdownItems = res.data
                 })
             },
 
-            deleteDam(id, nama)
+            deleteUser(id, nama)
             {
 
                 let vm = this
@@ -207,13 +203,13 @@ import 'vue-good-table/dist/vue-good-table.css'
                 })
                 .then((save) => {
                     if (save) {
-                        axios.delete('/api/dam/'+id)
+                        axios.delete('/api/user_management/detail/'+id)
                         .then(function (res) {
                             console.log(res)
                             if(res.data.status == 'success')
                             {
                                 toastr.success(res.data.message)
-                                vm.getDam();
+                                vm.getUser();
                             }
                         })
                         .catch(function (error) {

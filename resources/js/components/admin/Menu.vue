@@ -15,6 +15,14 @@
                     </router-link>
                 </li>
 
+                <li class="" :class="{'active' : subIsActive('/set_info')}" v-if="$auth.check()" >
+                    <router-link :to="{ name: 'info' }">
+                        <span class="pcoded-micon"><i class="ti-settings"></i></span>
+                        <span class="pcoded-mtext">Setting Sistem</span>
+                        <span class="pcoded-mcaret"></span>
+                    </router-link>
+                </li>
+
                 <li class="" :class="{'active' : subIsActive('/map_view')}" v-if="$auth.check()" >
                     <router-link :to="{ name: 'map_view' }">
                         <span class="pcoded-micon"><i class="ti-map-alt"></i></span>
@@ -57,42 +65,12 @@
                             <span class="pcoded-mcaret"></span>
                     </router-link>
                 </li>
-                <li class="pcoded-hasmenu pcoded-trigger" dropdown-icon="style1" subitem-icon="style6" v-if="$auth.check()" >
-                    <a href="javascript:void(0)">
+                <li class="" :class="{'active' : subIsActive('/user_management')}" v-if="$auth.check()" >
+                    <router-link :to="{ name: 'user.data' }">
                         <span class="pcoded-micon"><i class="ti-user"></i></span>
-                        <span class="pcoded-mtext" data-i18n="nav.user-profile.main">User Profile</span>
+                        <span class="pcoded-mtext">User Management</span>
                         <span class="pcoded-mcaret"></span>
-                    </a>
-                    <ul class="pcoded-submenu open">
-                        <li class="active">
-                            <a href="timeline.html">
-                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                <span class="pcoded-mtext" data-i18n="nav.user-profile.timeline">Timeline</span>
-                                <span class="pcoded-mcaret"></span>
-                            </a>
-                        </li>
-                        <li class="">
-                            <a href="timeline-social.html">
-                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                <span class="pcoded-mtext" data-i18n="nav.user-profile.timeline-social">Timeline Social</span>
-                                <span class="pcoded-mcaret"></span>
-                            </a>
-                        </li>
-                        <li class="">
-                            <a href="user-profile.html">
-                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                <span class="pcoded-mtext" data-i18n="nav.user-profile.user-profile">User Profile</span>
-                                <span class="pcoded-mcaret"></span>
-                            </a>
-                        </li>
-                        <li class="">
-                            <a href="user-card.html">
-                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                <span class="pcoded-mtext" data-i18n="nav.user-profile.user-card">User Card</span>
-                                <span class="pcoded-mcaret"></span>
-                            </a>
-                        </li>
-                    </ul>
+                    </router-link>
                 </li>
             </ul>
 
@@ -105,7 +83,6 @@
 <script>
     export default {
         mounted() {
-            console.log('Component mounted.')
         },
 
         methods: {

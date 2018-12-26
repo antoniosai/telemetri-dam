@@ -1,4 +1,7 @@
-export default {
+import Vue from 'vue';
+import Vuex from 'vuex';
+
+let configVuex = {
     state: {
         info: [],
         user: [],
@@ -16,13 +19,10 @@ export default {
         getInfo ({ commit }) {
             return new Promise((resolve, reject) => {
 
-                axios.get('/get_info')
+                axios.get('/api/get_info')
                 .then(function(res){
                     var data = res.data.data
-                    // console.log(res.data.data)
-
-                    commit('setInfo', data )
-
+                    commit('setInfo', data)
                     resolve(data);
                 });
 
@@ -31,11 +31,10 @@ export default {
         getAuthenticatedUser({commit}) {
             return new Promise((resolve, reject) => {
 
-                axios.get('/auth/user')
+                axios.get('/api/auth/user')
                 .then(function(res){
                     var data = res.data.data
-
-                    commit('setUser', data )
+                    commit('setUser', data)
 
                     resolve(data);
                 });
@@ -48,3 +47,9 @@ export default {
         user: state => state.user
     }
 };
+
+Vue.use(Vuex)
+
+let store = new Vuex.Store(configVuex)
+
+export default store

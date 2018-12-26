@@ -17,20 +17,32 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="nama_sistem">Nama Sistem</label>
-                                                <input type="text" v-model="info.nama_sistem" class="form-control">
+                                                <label for="username">Username</label>
+                                                <input type="text" v-model="user.username" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="name">Nama Lengkap</label>
+                                                <input type="text" v-model="user.name" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="email">E-Mail</label>
+                                                <input type="text" v-model="user.email" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="target_bendungan"><span style="color: red"><strong>*)</strong></span> Target Bendungan</label>
-                                                <input type="number" class="form-control" v-model="info.target_bendungan">
+                                                <input type="number" class="form-control" v-model="user.name">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="ip_address">IP Address</label>
-                                                <input type="text" v-model="info.host" class="form-control">
+                                                <input type="text" v-model="user.name" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -52,7 +64,8 @@
                                     </ul>
 
                                 </div>
-                                    <button type="button" @click.prevent="save" class="btn btn-block btn-primary"><i class="fa fa-check"></i> Register</button>
+                                <button type="button" @click.prevent="save" class="btn btn-block"><i class="fa fa-key"></i> Ganti Password</button>
+                                <button type="button" @click.prevent="save" class="btn btn-block btn-primary"><i class="fa fa-check"></i> Register</button>
                             </div>
                         </div>
 
@@ -67,71 +80,38 @@
 </template>
 
 <script>
-
-    // Initialize InputMask
-    // $(":input").inputmask();
+    // import { DataTables, DataTablesServer } from 'vue-data-tables'
+    // Vue.use(DataTables);
 
     export default {
-    
-
-        title: 'Setting Informasi Sistem',
-        data: () => ({
-            info: [],
-        }),
+        title: 'Profil',
 
         mounted() {
-            this.getInfo()
-            
+            this.getUser()
         },
-        
-        watch: {
-            // whenever question changes, this function will run
-            
+
+        data(){
+            return {
+                user: [],
+            }
         },
 
         methods: {
+            getUser()
+            {
+                let vm = this
 
-            getInfo() {
-                var vm = this
-
-                vm.info = vm.$store.getters.info;
-                // console.log(vm.info);
+                axios.get('/api/auth/user')
+                .then(res => {
+                    var data = res.data.data
+                    vm.user = data
+                })
             },
 
             save()
             {
-                let vm = this;
-
-                swal({
-                    title: "Apakah Anda ingin mengupdate Informasi Sistem?",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
-                })
-                .then((save) => {
-                    if (save) {
-                        axios.post('/api/save_info', vm.info)
-                        .then(res => {
-                            var data = res.data
-                            console.log(data);
-
-                            if(data.status == 'success')
-                            {
-                                vm.$store.commit('setInfo', data.data)
-                                toastr.success('Success', data.message)
-                            }
-                        })
-                        .catch(function (error) {
-                            console.log(error);
-                        });
-                    } else {
-                        toastr.info('You cancelled updating')
-                        // swal("Your imaginary file is safe!");
-                    }
-                });
-                
-                
+                alert('Save button clicked')
             }
         }
-    } 
+    }
 </script>

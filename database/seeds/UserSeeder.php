@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 
 use App\User;
+use App\Model\Role;
 
 class UserSeeder extends Seeder
 {
@@ -17,12 +18,14 @@ class UserSeeder extends Seeder
         $user_data = [
             [
                 'name' => 'Antonio Saiful Islam',
+                'role_id' => Role::where('slug', 'user')->first()->id,
                 'username' => 'antoniosai',
                 'password' => 'rahasia123',
                 'email' => 'finallyantonio@gmail.com'
             ],
             [
                 'name' => 'Administrator',
+                'role_id' => Role::where('slug', 'user')->first()->id,
                 'username' => 'admin',
                 'password' => 'admin123',
                 'email' => 'admin@mail.com'
@@ -38,6 +41,7 @@ class UserSeeder extends Seeder
                 $model->delete();
             }
             $user = new User;
+            $user->role_id = $list['role_id'];
             $user->username = $list['username'];
             $user->name = $list['name'];
             $user->email = $list['email'];

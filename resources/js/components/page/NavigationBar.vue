@@ -98,7 +98,7 @@
                             <a href="#!">
                                 <img src="/assets/images/user.png"
                                     alt="User-Profile-Image">
-                                <span>{{ $auth.user().username }} / {{ $auth.user().email }}</span>
+                                <span>{{ this.$store.getters.user.username }} / {{ this.$store.getters.user.email }}</span>
                                 <i class="ti-angle-down"></i>
                             </a>
                             <ul class="show-notification profile-notification">

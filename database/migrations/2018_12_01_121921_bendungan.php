@@ -17,11 +17,14 @@ class Bendungan extends Migration
             $table->increments('id');
             $table->string('kode_bendungan');
             $table->string('nama');
-            $table->string('keterangan')->nullable();
-            $table->string('alamat');
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();
             $table->string('token');
+            $table->char('desa_id', 10)->nullable();
+            $table->char('kecamatan_id', 7)->nullable();
+            $table->char('kota_id', 4)->nullable();
+            $table->char('provinsi_id', 2)->nullable();
+            $table->datetime('last_response')->nullable();
             $table->timestamps();
         });
     }
